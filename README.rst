@@ -258,6 +258,15 @@ Example configuration of disabling the rendering of captions on item-matrix:
 
     traceability_matrix_no_captions = True
 
+No captions for item-attributes-matrix
+--------------------------------------
+
+Example configuration of disabling the rendering of captions on item-attributes-matrix:
+
+.. code-block:: python
+
+    traceability_attributes_matrix_no_captions = True
+
 No captions for item-tree
 -------------------------
 
@@ -470,6 +479,25 @@ The relations to other documentation items can be specified as:
 The output will contain hyperlinks to all related items. By default the caption for the target item is displayed for
 each of these related items. With the option *nocaptions* these captions can be omited.
 
+.. _adding_relations:
+
+Adding relations outside of the item definitions
+================================================
+
+In some cases, it's useful to add relations outside of the definition of the items
+involved. In that case, you can use the ``item-link`` directive as follows
+
+.. code-block:: rest
+
+    .. item-link::
+        :sources: RQT1 RQT2
+        :targets: TST3 TST4 TST5
+        :type: validates
+
+This directive has no representation in the documentation build output. It will
+just add an additional relationship to the items mentioned in ``sources`` and
+``targets``
+
 .. _traceability_usage_item_linking:
 
 Manual link to documentation items
@@ -503,6 +531,32 @@ expression. Documentation items where the *status* attribute matches the given r
 
 By default the caption for every item in the list is shown. By providing the *nocaptions* flag, the
 caption can be omitted. This gives a smaller list, but also less details.
+
+.. _traceability_usage_item_attributes_matrix:
+
+Matrix with attributes of documentation items
+=============================================
+
+A matrix lising the attributes of documentation items can be generated using:
+
+.. code-block:: rest
+
+    .. item-attributes-matrix:: Attributes for requirements
+        :filter: SWRQT
+        :attributes: status
+        :nocaptions:
+
+where the *filter* argument can be replaced by any python regular expression. The *attributes* argument
+is a space-separated list of attributes that should be matched in the matrix.
+Both arguments can be avoided, or left empty, in which case the table will contain all attributes for all
+documentation items.
+
+Documentation items matching their ID to the given *filter* regular expression end up in as rows in the
+generated table. The matching attribute values end up as columns in the generated table. Documentation items
+that don't have a value for a certain attribute will have an empty cell at the corresponding location.
+
+By default the caption for every item in the table is shown. By providing the *nocaptions* flag, the
+caption can be omitted. This gives a smaller table, but also less details.
 
 .. _traceability_usage_item_matrix:
 

@@ -195,6 +195,48 @@ Another matrix that should spawn a warning as the relation in *type* does not ex
     :targettitle: system requirement
     :sourcetitle: software requirement
 
+Item attribute matrix
+=====================
+
+ASIL attribute for all r-items
+------------------------------
+
+.. item-attributes-matrix:: None
+    :filter: r
+    :attributes: asil
+
+Some attributes for all items
+-----------------------------
+
+.. item-attributes-matrix:: ASIL and status attribute for all items
+    :filter:
+    :attributes: asil status
+
+All attributes for all r-items
+------------------------------
+
+.. item-attributes-matrix:: All attributes for all r-items
+    :filter: r
+    :attributes:
+    :nocaptions:
+
+All attributes for all items
+------------------------------
+
+.. item-attributes-matrix:: All attributes for all items
+
+All attributes for non-matching-filter
+--------------------------------------
+
+.. item-attributes-matrix:: Non-matching filter: empty table
+    :filter: regex_doesnt_match_anything
+
+Invalid attribute for all items
+-------------------------------
+
+.. item-attributes-matrix:: Invalid attribute
+    :attributes: non_existing_relation_or_attribute asil
+
 Item 2D matrix
 ==============
 
@@ -290,6 +332,46 @@ Another tree that should spawn a warning as the relation in *type* does not exis
         :top: SYS
         :top_relation_filter: depends_on
         :type: fulfilled_by fulfills
+
+This is a subtitle that has a ``item-link`` item under it. You shouldn't see anything in the rendering, though
+--------------------------------------------------------------------------------------------------------------
+
+.. item-link::
+    :sources: r001
+    :targets: r002
+    :type: trace
+
+.. test: link to later (bottom of this page) defined source, should not warn
+
+.. item-link::
+    :sources: late001
+    :type: trace
+    :targets: r001
+
+.. warning on next item-link due to missing sources:
+
+.. item-link::
+    :type: trace
+    :targets: r100
+
+.. warning on next item-link due to missing targets:
+
+.. item-link::
+    :sources: r100
+    :type: trace
+
+.. warning on next item-link due to missing relation type:
+
+.. item-link::
+    :sources: r100
+    :targets: r001
+
+Extra late requirements
+-----------------------
+
+.. item:: late001
+
+    Item is added after adding links from it using item-link above. This shouldn't give a warning.
 
 Links and references
 ====================
