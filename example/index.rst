@@ -281,7 +281,7 @@ Using attributes in 2D matrix
 .. item-2d-matrix:: 2D matrix showing target item attribute in the table
     :target: r
     :source: r
-    :hit: level
+    :hit: asil
     :miss:
     :type: trace
 
