@@ -52,7 +52,8 @@ class ItemTree(TraceableBaseNode):
                 # print('%s has child %s for relation %s' % (item_id, target, relation))
                 if collection.get_item(target).attributes_match(self['filter-attributes']):
                     childcontent.append(self._generate_bullet_list_tree(app, collection, target))
-        bullet_list_item.append(childcontent)
+        if len(childcontent) > 0:
+            bullet_list_item.append(childcontent)
         return bullet_list_item
 
 
