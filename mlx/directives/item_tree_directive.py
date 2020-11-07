@@ -19,17 +19,12 @@ class ItemTree(TraceableBaseNode):
         """
         top_item_ids = collection.get_items(self['top'], self['filter-attributes'])
         top_node = self.create_top_node(self['title'])
-        if isinstance(app.builder, LaTeXBuilder):
-            p_node = nodes.paragraph()
-            p_node.append(nodes.Text('Item tree is not supported in latex builder'))
-            top_node.append(p_node)
-        else:
-            ul_node = nodes.bullet_list()
-            ul_node.set_class('bonsai')
-            for id_ in top_item_ids:
-                if self.is_item_top_level(app.env, id_):
-                    ul_node.append(self._generate_bullet_list_tree(app, collection, id_))
-            top_node += ul_node
+        ul_node = nodes.bullet_list()
+        ul_node.set_class('bonsai')
+        for id_ in top_item_ids:
+            if self.is_item_top_level(app.env, id_):
+                ul_node.append(self._generate_bullet_list_tree(app, collection, id_))
+        top_node += ul_node
         self.replace_self(top_node)
 
     def _generate_bullet_list_tree(self, app, collection, item_id):
